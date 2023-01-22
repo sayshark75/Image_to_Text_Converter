@@ -7,7 +7,6 @@ const ImageToText = () => {
   const [outText, setOutText] = useState("");
   const [fileUrl, setFileUrl] = useState("");
   const [ocrLoad, setOcrLoad] = useState(false);
-  const [loading, setLoading] = useState(false);
   const toast = useToast();
   const inputRef = useRef<HTMLInputElement>(null);
   const worker = createWorker({
@@ -17,9 +16,6 @@ const ImageToText = () => {
     await worker.load();
     await worker.loadLanguage("eng");
     await worker.initialize("eng");
-    await worker.setParameters({
-      tessedit_char_whitelist: "0123456789",
-    });
     const {
       data: { text },
     } = await worker.recognize(fileUrl);
@@ -28,7 +24,6 @@ const ImageToText = () => {
   };
 
   const handleChange = async (e: React.FormEvent) => {
-    setLoading(true);
     try {
       if (inputRef != null) {
         const myUrl = inputRef!.current!.files[0];
@@ -39,8 +34,6 @@ const ImageToText = () => {
           body: formData,
         });
         let data = await res.json();
-        console.log(data);
-        setLoading(false);
         setFileUrl(data.data.display_url);
       }
     } catch (error) {
@@ -74,7 +67,7 @@ const ImageToText = () => {
           <Button colorScheme={"blue"} onClick={() => inputRef?.current?.click()}>
             Select Image
           </Button>
-          <Button disabled={loading} colorScheme={"green"} onClick={handleConvert}>
+          <Button isDisabled={fileUrl ? false : true} colorScheme={"green"} onClick={handleConvert}>
             Convert
           </Button>
         </Flex>
