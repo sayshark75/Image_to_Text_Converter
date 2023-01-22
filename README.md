@@ -33,11 +33,11 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Tesseract OCR Api
 
-# Used to Convert Image to Text using Optical Character Recognition
+### Used to Convert Image to Text using Optical Character Recognition
 
 ## Building Ajenda ?
 
-# To Create a Sudoku Solver using Image Optical CHaracter recognition
+### To Create a Sudoku Solver using Image Optical Character Recognition
 
 - Important Things to remember
 
@@ -47,4 +47,4 @@ await worker.setParameters({
   });
 ```
 
-# Helps to Find Only Numbers
+### Helps to Find Only Numbers
