@@ -39,7 +39,7 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ### To Create a Sudoku Solver using Image Optical Character Recognition
 
-- Important Things to remember
+- Important Things to remember,This helps to Pick Only Numbers
 
 ```bash
 await worker.setParameters({
@@ -47,4 +47,10 @@ await worker.setParameters({
   });
 ```
 
-### Helps to Find Only Numbers
+### Want to Contribute?
+
+- Create an Issue and Write Your Toughts there :D
+
+### Document
+
+![Screenshot (1450)](https://user-images.githubusercontent.com/112304655/213925409-edd316bc-fd3e-4cc8-bc54-27c583eeb75b.png)

@@ -1,21 +1,22 @@
 import React, { useRef, useState } from "react";
-import { Flex, Heading, Input, Button, Box, useToast } from "@chakra-ui/react";
+import { Flex, Heading, Input, Button, Box, useToast, Image } from "@chakra-ui/react";
 import ShowOutput from "./ShowOutput";
 import { createWorker } from "tesseract.js";
 
 const ImageToText = () => {
-  const [outText, setOutText] = useState("");
-  const [fileUrl, setFileUrl] = useState("");
-  const [ocrLoad, setOcrLoad] = useState(false);
+  const [outText, setOutText] = useState<string>("");
+  const [fileUrl, setFileUrl] = useState<string>("");
+  const [ocrLoad, setOcrLoad] = useState<boolean>(false);
   const toast = useToast();
   const inputRef = useRef<HTMLInputElement>(null);
-  const worker = createWorker({
+  const worker: Tesseract.Worker = createWorker({
     logger: (m) => console.log(m),
   });
   const doOCR = async () => {
     await worker.load();
     await worker.loadLanguage("eng");
     await worker.initialize("eng");
+
     const {
       data: { text },
     } = await worker.recognize(fileUrl);
@@ -23,7 +24,7 @@ const ImageToText = () => {
     setOcrLoad(false);
   };
 
-  const handleChange = async (e: React.FormEvent) => {
+  const handleChange: React.ChangeEventHandler<HTMLInputElement> = async (e: React.FormEvent) => {
     try {
       if (inputRef != null) {
         const myUrl = inputRef!.current!.files[0];
@@ -40,7 +41,7 @@ const ImageToText = () => {
       setOutText("Network : : " + error);
     }
   };
-  const handleConvert = () => {
+  const handleConvert: React.MouseEventHandler<HTMLButtonElement> = () => {
     if (fileUrl) {
       setOcrLoad(true);
       doOCR();
@@ -61,18 +62,19 @@ const ImageToText = () => {
       <Heading size={"lg"} my={8} color={"blue.500"}>
         Image To Text Converter
       </Heading>
-      <Flex p={5} gap={5} w={"380px"} justifyContent={"center"} alignItems={"center"} direction={"column"} boxShadow="dark-lg" borderRadius={8}>
+      <Flex p={5} gap={5} w={"380px"} justifyContent={"center"} alignItems={"center"} direction={"column"} boxShadow="2xl" borderRadius={8}>
         <Input ref={inputRef} onChange={handleChange} accept="image/png, image/jpg, image/jpeg" display={"none"} type={"file"} />
         <Flex gap={2}>
-          <Button colorScheme={"blue"} onClick={() => inputRef?.current?.click()}>
+          <Button bgColor={"#00B0E8"} onClick={() => inputRef?.current?.click()}>
             Select Image
           </Button>
-          <Button isDisabled={fileUrl ? false : true} colorScheme={"green"} onClick={handleConvert}>
+          <Button isDisabled={fileUrl ? false : true} bgColor={"#00DF0A"} onClick={handleConvert}>
             Convert
           </Button>
         </Flex>
         <ShowOutput imgSrc={fileUrl} outText={outText} load={ocrLoad} />
       </Flex>
+      <Image src={"https://user-images.githubusercontent.com/112304655/213923243-fad2fa94-b415-4712-9ae0-7ff847f5f099.svg"} alt={"Hello"} />
     </Flex>
   );
 };

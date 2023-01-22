@@ -2,6 +2,7 @@ import { Flex, Image, Heading, Text, IconButton, Spinner, useToast, Box } from "
 import React from "react";
 import { BiCopy } from "react-icons/bi";
 import copy from "copy-to-clipboard";
+import { JsxElement } from "typescript";
 
 type ShowOutputProps = {
   imgSrc: string;
@@ -11,12 +12,12 @@ type ShowOutputProps = {
 
 const ShowOutput = ({ imgSrc, outText, load }: ShowOutputProps) => {
   const toast = useToast();
-  const handleCopy = () => {
+  const handleCopy: React.MouseEventHandler<HTMLButtonElement> = () => {
     copy(outText);
     toast({
       position: "top",
       render: () => (
-        <Box color="white" p={3} bg="green.500">
+        <Box color="black" p={3} bg="#00DF0A">
           Copied!
         </Box>
       ),
