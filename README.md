@@ -53,4 +53,4 @@ await worker.setParameters({
 
 ### Document
 
-![Screenshot (1450)](https://user-images.githubusercontent.com/112304655/213925409-edd316bc-fd3e-4cc8-bc54-27c583eeb75b.png)
+![image](https://user-images.githubusercontent.com/112304655/213925950-82485ca6-8f3c-48fe-91db-9328dfcabdff.png)
