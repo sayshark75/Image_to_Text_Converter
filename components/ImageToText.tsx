@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Flex, Heading, Input, Button, Box, useToast, Image } from "@chakra-ui/react";
 import ShowOutput from "./ShowOutput";
-import { createWorker } from "tesseract.js";
+import Tesseract, { createWorker } from "tesseract.js";
 
 const ImageToText = () => {
   const [outText, setOutText] = useState<string>("");
@@ -13,15 +13,10 @@ const ImageToText = () => {
     logger: (m) => console.log(m),
   });
   const doOCR = async () => {
-    await worker.load();
-    await worker.loadLanguage("eng");
-    await worker.initialize("eng");
-
-    const {
-      data: { text },
-    } = await worker.recognize(fileUrl);
-    setOutText(text);
-    setOcrLoad(false);
+    Tesseract.recognize(fileUrl, "eng", { logger: (m) => console.log(m) }).then(({ data: { text } }) => {
+      setOutText(text);
+      setOcrLoad(false);
+    });
   };
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = async (e: React.FormEvent) => {
@@ -74,7 +69,7 @@ const ImageToText = () => {
         </Flex>
         <ShowOutput imgSrc={fileUrl} outText={outText} load={ocrLoad} />
       </Flex>
-      <Image src={"https://user-images.githubusercontent.com/112304655/213923243-fad2fa94-b415-4712-9ae0-7ff847f5f099.svg"} alt={"Hello"} />
+      <Image src={"https://user-images.githubusercontent.com/112304655/216254164-4ec2e78f-fea8-4f68-bb51-4ca48bc24a42.svg"} alt={"Hello"} />
     </Flex>
   );
 };
