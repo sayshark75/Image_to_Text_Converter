@@ -23,14 +23,8 @@ const ImageToText = () => {
     try {
       if (inputRef != null) {
         const myUrl = inputRef!.current!.files[0];
-        let formData = new FormData();
-        formData.append("image", myUrl);
-        let res = await fetch("https://api.imgbb.com/1/upload?expiration=600&key=c17fb71a1a4eb8f95032fe46cee4de81", {
-          method: "POST",
-          body: formData,
-        });
-        let data = await res.json();
-        setFileUrl(data.data.display_url);
+        const url = URL.createObjectURL(myUrl);
+        setFileUrl(url);
       }
     } catch (error) {
       setOutText("Network : : " + error);
