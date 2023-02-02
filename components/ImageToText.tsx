@@ -69,7 +69,7 @@ const ImageToText = () => {
         </Flex>
         <ShowOutput imgSrc={fileUrl} outText={outText} load={ocrLoad} />
       </Flex>
-      <Image src={"https://user-images.githubusercontent.com/112304655/216254164-4ec2e78f-fea8-4f68-bb51-4ca48bc24a42.svg"} alt={"Hello"} />
+      <Image src={"https://user-images.githubusercontent.com/112304655/216254923-0db067c6-c1ac-45e1-a62c-ae7777e4eaf7.svg"} alt={"Hello"} />
     </Flex>
   );
 };
